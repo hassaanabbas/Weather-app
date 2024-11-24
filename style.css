@@ -87,5 +87,55 @@ body{
     font-size: 28px;
     margin-top: -6px;
 }
+@media only screen and (max-width: 768px) {
+    .card {
+        width: 80%;
+        margin: 20px auto;
+    }
+    .search {
+        flex-direction: column;
+        align-items: center;
+    }
+    .search input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .Weather {
+        padding: 20px;
+    }
+    .details {
+        flex-direction: column;
+    }
+    .col {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .card {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .search input {
+        padding: 10px;
+        font-size: 16px;
+    }
+    .Weather-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .weather-main {
+        font-size: 18px;
+    }
+    .temp {
+        font-size: 24px;
+    }
+    .city {
+        font-size: 18px;
+    }
+    .humidity, .wind {
+        font-size: 16px;
+    }
+}
 
 
