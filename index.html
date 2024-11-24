@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" id="city" placeholder="Search for a city..." spellcheck="false">
+            <button>
+                <img src="images/search.png" alt="">
+            </button>
+        </div>
+        <div class="Weather">
+            <img src="images/haze.svg" class="Weather-icon">
+            <h2 class="weather-main">Haze</h2>
+            <h1 class="temp">22°C</h1>
+            <h2 class="city"><b></b>Hyderabad</b></h2>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png" >
+                    <div> 
+                        <p class="humidity"> 80%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.svg" >
+                    <div> 
+                        <p class="wind"> 55 km/h</p>
+                        <p>wind speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+    <script>
+    const apiKey = "9e31eccbbe4ad202deffe201517010ec";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+const searchButton = document.querySelector("button");
+const weatherIcon = document.querySelector(".Weather-icon");
+const cityInput = document.querySelector("#city");
+
+async function checkWeather(){
+    const city = cityInput.value;
+    const response = await fetch(`${apiUrl}?q=${city}&units=metric&appid=${apiKey}`);
+    var data = await response.json();
+    console.log(data);
+    document.querySelector(".weather-main").innerHTML = data.weather[0].description;
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp)  + "°C";
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+    const weatherIcons = {
+      "01d": "images/clear-day.svg",
+      "01n": "images/clear-night.svg",
+      "02d": "images/cloudy-1-day.svg",
+      "02n": "images/cloudy-1-night.svg",
+      "03d": "images/cloudy-2-day.svg",
+      "03n": "images/cloudy-2-night.svg",
+      "04d": "images/cloudy-3-day.svg",
+      "04n": "images/cloudy-3-night.svg",
+      "09d": "images/rainy-1-day.svg",
+      "09n": "images/rainy-1-night.svg",
+      "10d": "images/rainy-3-day.svg",
+      "10n": "images/rainy-3-night.svg",
+      "11d": "images/scattered-thunderstorms-day.svg",
+      "11n": "images/scattered-thunderstorms-night.svg",
+      "13d": "images/snowy-3-day.svg",
+      "13n": "images/snowy-3-night.svg",
+      "50d": "images/haze-day.svg",
+      "50n": "images/haze-day.svg"
+    };
+
+    weatherIcon.src = weatherIcons[data.weather[0].icon] || "images/haze.svg";
+}
+
+searchButton.addEventListener('click', checkWeather);
+</script>
+
+    
+</body>
+</html>
